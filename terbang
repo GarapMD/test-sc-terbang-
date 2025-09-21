@@ -1,3 +1,46 @@
+-- Universal GUI Hub (Rayfield) -- Full upgraded version
+-- Only paste into Solara or executor; client-side only
+
+-- Load Rayfield safely
+local ok, Rayfield = pcall(function()
+    return loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+end)
+if not ok or not Rayfield then
+    warn("Rayfield failed to load. Check your executor/network.")
+    return
+end
+
+-- State table
+local g = {
+    WalkSpeed = 16,
+    JumpPower = 50,
+    Fly = false,
+    FlySpeed = 70,
+    Noclip = false,
+    InfJump = false,
+    ESP = false,
+}
+
+-- Utility
+local function safeHumanoidSet(prop,val)
+    pcall(function()
+        local char = LocalPlayer.Character
+        if char then
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if hum then hum[prop] = val end
+        end
+    end)
+end
+
+-- Window
+local Window = Rayfield:CreateWindow({
+    Name = "🎮 SC HUB BREMBO GAMING 🎮",
+    LoadingTitle = "SCRIFT BY YT CHANNEL BREMBO GAMING",
+    LoadingSubtitle = "❗ ini adalah sc buatan brembo gaming dilarang di salah gunakan  ❗",
+    ConfigurationSaving = { Enabled = false },
+    KeySystem = false
+})
+
 -- Script Terbang Roblox
 
 local UserInputService = game:GetService("UserInputService")
@@ -82,3 +125,6 @@ game:GetService("RunService").Heartbeat:Connect(function()
 		bodyGyro.CFrame = workspace.CurrentCamera.CFrame
 	end
 end)
+
+-- Notify load
+Rayfield:Notify({Title="Universal GUI", Content="Loaded successfully", Duration=3})
